@@ -10,10 +10,10 @@ ROWS = 3
 COLS = 3
 
 symbol_count = {
-    "A": 5,
+    "A": 2,
     "B": 4,
-    "C": 3,
-    "D": 2
+    "C": 5,
+    "D": 8
 }
 
 symbol_value = {
@@ -70,7 +70,7 @@ def print_slot_machine(columns):
 
 def deposit():
     while True:
-        ammount = input("What would you like to deposit? $")
+        ammount = input("What would you like to deposit? ₹")
         if ammount.isdigit():
             ammount = int(ammount)
             if ammount > 0:
@@ -100,13 +100,13 @@ def get_number_of_lines():
 
 def get_bet():
     while True:
-        ammount = input("What would you like to bet? $")
+        ammount = input("What would you like to bet? ₹")
         if ammount.isdigit:
             ammount = int (ammount)
             if MIN_BET <= ammount <= MAX_BET:
                 break
             else:
-                print(f"Ammount must be between ${MIN_BET}-${MAX_BET}.")
+                print(f"Ammount must be between ₹{MIN_BET}-₹{MAX_BET}.")
         else:
             print("Please enter a number.")
         
@@ -119,15 +119,15 @@ def spin(balance):
         total_bet = bet * lines
         
         if total_bet > balance:
-            print(f"You do not have enough to bet that ammount, your current balance is ${balance}")
+            print(f"You do not have enough to bet that ammount, your current balance is ₹{balance}")
         else:
             break
-    print(f"You are betting ${bet} on {lines} lines. Total bet ammount is ${total_bet}.")
+    print(f"You are betting ₹{bet} on {lines} lines. Total bet ammount is ₹{total_bet}.")
 
     slots = get_slot_machine_spin(ROWS, COLS, symbol_count)
     print_slot_machine(slots)
     winnings, winning_lines = check_winnings(slots, lines, bet, symbol_value)
-    print(f"You won ${winnings}.")
+    print(f"You won ₹{winnings}.")
     print(f"You won on lines:", *winning_lines)
 
     return winnings - total_bet
@@ -137,12 +137,12 @@ def spin(balance):
 def main():
     balance = deposit()
     while True:
-        print(f"Current balance is ${balance}")
+        print(f"Current balance is ₹{balance}")
         answer = input("Press enter to play (q to quit).")
         if answer == "q":
             break
         balance += spin(balance)
 
-    print("You left with ${balance}")
+    print(f"You left with ₹{balance}")
 
 main()
